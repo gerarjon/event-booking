@@ -3,3 +3,13 @@
   max-width: 80%;
   margin: 7rem auto;
 }
+
+.switch-mode-text {
+ margin-top: 8px;
+}
+
+.switch-mode-link {
+  color: rgb(76, 144, 207);
+  text-decoration: underline;
+  cursor: pointer;
+}
