@@ -1,13 +1,16 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
+import AuthContext from '../../context/auth-context'
 import "./style.css"
 
 function AuthPage() {
   const emailEl = useRef();
   const passwordEl = useRef();
   const [isLogIn, setIsLogIn] = useState(true);
+
+  const context = useContext(AuthContext);
 
   const switchModeHandler = () => {
     setIsLogIn(!isLogIn);
@@ -54,14 +57,20 @@ function AuthPage() {
         'Content-Type': 'application/json'
       }
     })
-    .then( res => {
+    .then(res => {
       if (res.status !== 200 && res.status !== 201) {
         throw new Error('Failed');
       }
       return res.json();
     })
-    .then( resData => {
-      console.log(resData);
+    .then(resData => {
+      if(resData.data.login.token) {
+        context.login(
+          resData.data.login.token, 
+          resData.data.login.userId, 
+          resData.data.login.tokenExpiration
+        )
+      }
     })
     .catch( err => {
       console.log(err)
