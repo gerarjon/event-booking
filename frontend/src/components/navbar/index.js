@@ -1,9 +1,9 @@
 import React from 'react'
 import { NavLink, Link } from 'react-router-dom';
-import AuthContext from '../../context/auth-context'
+import AuthContext from '../../context/auth-context';
 import './style.css'
 
-const Navbar = ({ isActive, isActiveHandle }) => (
+const Navbar = ({isActive, isActiveHandle}) => (
 
   <AuthContext.Consumer>
     {context => { 

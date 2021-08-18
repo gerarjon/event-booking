@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from '../components/Modal';
 
 const EventsPage = () => {
   return(
@@ -6,6 +7,9 @@ const EventsPage = () => {
       <h1>
         Events Page
       </h1>
+
+      {/* Add Event Modal   */}
+      <Modal />
     </div>
   )
 }
