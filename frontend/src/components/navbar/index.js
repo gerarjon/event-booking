@@ -6,7 +6,7 @@ const Navbar = props => {
   const [isActive, setIsActive] = useState(false);
 
   return(
-    <nav className="navbar" role="navigation" aria-label="main navigation">
+    <nav className="navbar is-danger" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <Link className="navbar-item" to="/">
           Event Booking
@@ -41,10 +41,10 @@ const Navbar = props => {
           <div className="navbar-item">
             <div className="buttons">
               <Link className="button is-primary" to="/auth">
-                Sign up
+                Log in
               </Link>
               <Link className="button is-light" to="/auth">
-                Log in
+                Sign up
               </Link>
             </div>
           </div>
