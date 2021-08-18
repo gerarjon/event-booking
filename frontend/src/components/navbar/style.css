@@ -1,3 +1,7 @@
+.navbar-brand > .navbar-item {
+  font-weight: 900 !important;
+}
+
 .navbar-item.active {
   background-color: #ef2e55;
 }

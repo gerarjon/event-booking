@@ -45,14 +45,14 @@ const Navbar = ({ isActive, isActiveHandle }) => (
               <div className="navbar-item">
                 <div className="buttons">
                   {!context.token && (
-                    <Link className="button is-primary" to="/auth">
+                    <Link className="button " to="/auth">
                       Log in
                     </Link>
                   )}
                   {context.token && (
-                    <Link className="button is-light" to="/auth">
+                    <button className="button is-light" onClick={context.logout}>
                       Sign out
-                    </Link>
+                    </button>
                   )}
                 </div>
               </div>
