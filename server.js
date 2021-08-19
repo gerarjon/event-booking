@@ -3,9 +3,16 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const { graphqlHTTP} = require('express-graphql');
 const mongoose = require('mongoose');
+const path = require('path');
+require('dotenv').config();
 
 const graphQlSchema = require('./graphql/schema/index')
 const graphQlResolvers = require('./graphql/resolvers/index')
+
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("frontend/build"));
+}
 
 // CORS Headers
 app.use((req,res,next) => {
@@ -36,21 +43,26 @@ app.use(
   graphqlHTTP({
     schema: graphQlSchema,
     rootValue: graphQlResolvers,
-    graphiql: true
   })
 );
 
-mongoose.connect(
-  `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@event.fchc8.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`,
+// Default behavior: send every unmatched route request to the React app (in production)
+app.get("*", (req, res) => {
+if (process.env.NODE_ENV === "production") {
+  return res.sendFile(path.join(__dirname, "./client/build/index.html"));
+} 
+  res.sendStatus(404);
+});
+mongoose.connect(process.env.MONGODB_URI,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   }
-)
-.then(()=> {
-  app.listen(PORT, function() {
-    console.log(`🌎 ==> API server now on port ${PORT}!`)
-  });
+  )
+  .then(()=> {
+    app.listen(PORT, function() {
+      console.log(`🌎 ==> API server now on port ${PORT}!`)
+    });
 })
 .catch (err => {
   console.log(err);
