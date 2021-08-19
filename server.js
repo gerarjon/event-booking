@@ -12,7 +12,7 @@ app.use((req,res,next) => {
   // every client can access server
   res.setHeader('Access-Control-Allow-Origin', "*");
   // post, get, options requests can be sent to server
-  res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS')
+  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   if (req.method === 'OPTIONS') {
     return res.sendStatus(200)
