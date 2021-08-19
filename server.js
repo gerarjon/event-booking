@@ -11,7 +11,7 @@ const graphQlResolvers = require('./graphql/resolvers/index')
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("frontend/build"));
+  app.use(express.static("client/build"));
 }
 
 // CORS Headers
@@ -48,11 +48,9 @@ app.use(
 
 // Default behavior: send every unmatched route request to the React app (in production)
 app.get("*", (req, res) => {
-if (process.env.NODE_ENV === "production") {
-  return res.sendFile(path.join(__dirname, "./client/build/index.html"));
-} 
-  res.sendStatus(404);
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
+
 mongoose.connect(process.env.MONGODB_URI,
   {
     useNewUrlParser: true,
