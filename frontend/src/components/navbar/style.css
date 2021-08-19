@@ -2,6 +2,8 @@
   font-weight: 900 !important;
 }
 
-.navbar-item.active {
-  background-color: #ef2e55;
-}
+@media only screen and (min-width: 600px) {
+  .navbar-item.active {
+    background-color: #ef2e55;
+  }
+} 

@@ -3,9 +3,8 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import AuthPage from './pages/AuthPage'
 import BookingsPage from './pages/Bookings';
-import EventsPage from './pages/Events';
+import EventsPage from './pages/Events/Events';
 import NavBar from './components/Navbar';
-import Container from './components/Container';
 import AuthContext from './context/auth-context';
 
 import 'bulma/css/bulma.min.css';
@@ -50,18 +49,16 @@ class App extends Component {
               isActiveHandle={this.isActiveHandle}
             />
             <main>
-              <Container>
-                <Switch>
-                  {/* If no token, redirect to auth */}
-                  {!this.state.token && <Redirect from="/booking" to="/auth" exact />}
-                  {this.state.token && <Redirect from="/auth" to="/events" exact />}
-                  <Route path="/auth" component={AuthPage} />
-                  <Route path="/events" component={EventsPage} />
-                  {this.state.token && (
-                    <Route path="/booking" component={BookingsPage} />
-                  )}
-                </Switch>
-              </Container>
+              <Switch>
+                {/* If no token, redirect to auth */}
+                {!this.state.token && <Redirect from="/booking" to="/auth" exact />}
+                {this.state.token && <Redirect from="/auth" to="/events" exact />}
+                <Route path="/auth" component={AuthPage} />
+                <Route path="/events" component={EventsPage} />
+                {this.state.token && (
+                  <Route path="/booking" component={BookingsPage} />
+                )}
+              </Switch>
             </main>
           </AuthContext.Provider>
         </React.Fragment>
