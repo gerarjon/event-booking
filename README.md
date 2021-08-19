@@ -60,7 +60,3 @@ to connect to the database.
 ## Author
 
 **Gerar Suaverdez** - [GitHub Profile](https://github.com/gerarjon)
-
-
-
-
