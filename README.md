@@ -52,7 +52,7 @@ You will also see any lint errors in the console.
 
 ##
 
-You must create a ".env" with the your 
+You must create a ".env" with your 
 ### `MONGODB_URI`
 to connect to the database. 
 
