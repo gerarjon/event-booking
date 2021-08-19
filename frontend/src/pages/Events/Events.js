@@ -150,6 +150,9 @@ const EventsPage = () => {
   }
 
   const bookEventHandler = () => {
+    if (!context.token) {
+      setSelectedEvent(null)
+    }
     const requestBody = {
       query: `
         mutation {
@@ -177,6 +180,7 @@ const EventsPage = () => {
     })
     .then(resData => {
       console.log(resData)
+      setSelectedEvent(null)
     })
     .catch( err => {
       console.log(err);
@@ -224,6 +228,7 @@ const EventsPage = () => {
         price={selectedEvent.price}
         date={selectedEvent.date}
         description={selectedEvent.description}
+        confirmText={context.token? 'Book event' : 'Confirm'}
         />
       )}
       

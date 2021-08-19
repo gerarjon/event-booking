@@ -19,7 +19,7 @@ const ModalDetails = (props) => {
             <p>${props.price}</p>
           </section>
           <footer className="modal-card-foot">
-            <button className="button is-success" onClick={props.bookEventHandler}>Book Event</button>
+            <button className="button is-success" onClick={props.bookEventHandler}>{props.confirmText}</button>
             <button className="button" onClick={props.isDetailsActiveHandler} data-target="modal-de">Cancel</button>
           </footer>
         </div>
