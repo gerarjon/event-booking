@@ -4,6 +4,7 @@ const app = express();
 const { graphqlHTTP} = require('express-graphql');
 const mongoose = require('mongoose');
 const path = require('path');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 require('dotenv').config();
 
 const graphQlSchema = require('./graphql/schema/index')
@@ -39,10 +40,15 @@ app.use(express.json());
 app.use(isAuth);
 
 app.use(
-  '/api', 
+  '/api',
   graphqlHTTP({
     schema: graphQlSchema,
     rootValue: graphQlResolvers,
+    graphiql: true
+  }),
+  createProxyMiddleware({
+    target: 'http://localhost:3001',
+    changeOrigin: true,
   })
 );
 

@@ -66,7 +66,7 @@ class AuthPage extends Component {
       };
     }
 
-    fetch('http://localhost:3001/api', {
+    fetch('/api', {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {
