@@ -42,7 +42,12 @@ const EventsPage = () => {
     const date = dateElRef.current.value;
     const description = descriptionElRef.current.value;
 
-    if (title.trim().length === 0 || price <= 0 || date.trim().length === 0 || description.trim().length === 0) {
+    if (
+      title.trim().length === 0 || 
+      price <= 0 || 
+      date.trim().length === 0 || 
+      description.trim().length === 0
+    ) {
       return;
     }
 
@@ -61,13 +66,14 @@ const EventsPage = () => {
     }
 
     const token = context.token;
+    console.log(token)
 
     fetch('http://localhost:3001/api', {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
+        Authorization: 'Bearer ' + token
       }
     })
     .then(res => {
@@ -93,7 +99,6 @@ const EventsPage = () => {
       console.log(err)
     })
     isActiveHandler();
-    fetchEvents();
   }
 
   const fetchEvents = () => {

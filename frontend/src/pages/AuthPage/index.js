@@ -1,25 +1,33 @@
-import React, { useRef, useState, useContext } from 'react';
+import React, { Component, createRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import AuthContext from '../../context/auth-context'
 import "./style.css"
 
-function AuthPage() {
-  const emailEl = useRef();
-  const passwordEl = useRef();
-  const [isLogIn, setIsLogIn] = useState(true);
+class AuthPage extends Component {
+  state = {
+    isLogin: true
+  }
 
-  const context = useContext(AuthContext);
+  static contextType = AuthContext
 
-  const switchModeHandler = () => {
-    setIsLogIn(!isLogIn);
+  constructor(props) {
+    super(props);
+    this.emailEl = createRef();
+    this.passwordEl = createRef()
+  }
+
+  switchModeHandler = () => {
+    this.setState(prevState => {
+      return { isLogin: !prevState.isLogin };
+    });
   };
 
-  const submitHandler = event => {
+  submitHandler = event => {
     event.preventDefault();
-    const email = emailEl.current.value;
-    const password = passwordEl.current.value;
+    const email = this.emailEl.current.value;
+    const password = this.passwordEl.current.value;
 
     if (email.trim().length === 0 || password.trim().length === 0) {
       return;
@@ -37,7 +45,7 @@ function AuthPage() {
       `
     }
 
-    if (!isLogIn) {
+    if (!this.state.isLogin) {
       requestBody = {
         query: `
           mutation {
@@ -64,8 +72,10 @@ function AuthPage() {
       return res.json();
     })
     .then(resData => {
-      if(resData.data.login.token) {
-        context.login(
+      let rest = resData
+      console.log(rest)
+      if (resData.data.login.token) {
+        this.context.login(
           resData.data.login.token, 
           resData.data.login.userId, 
           resData.data.login.tokenExpiration
@@ -75,53 +85,56 @@ function AuthPage() {
     .catch( err => {
       console.log(err)
     })
+  };
+
+  render() {
+      return(
+        <form className="auth-form" onSubmit={ this.submitHandler }>
+          {/* Page Title */}
+          <div className="title has-text-centered">
+            { !this.state.isLogin ? "Sign Up" : "Log In"}
+          </div>
+    
+          {/* Email Form */}
+          <div className="field">
+            <label className="label" htmlFor="email">Email</label>
+            <p className="control has-icons-left">
+              <input type="email" id="email" className="input" placeholder="Piyopiyo@example.com" ref={this.emailEl} />
+              <span className="icon is-small is-left">
+                <FontAwesomeIcon icon={faEnvelope}/>
+              </span>
+            </p>
+          </div>
+    
+          {/* Password Form */}
+          <div className="field">
+            <label className="label" htmlFor="password">Password</label>
+            <p className="control has-icons-left">
+              <input type="password" id="password" className="input" placeholder="***********" ref={this.passwordEl} />
+              <span className="icon is-small is-left">
+                <FontAwesomeIcon icon={faLock}/>
+              </span>
+            </p>
+          </div>
+    
+          {/* Buttons */}
+          <div className="field is-grouped">
+            <p className="control">
+              <button type="submit" className="button is-primary">
+                Submit
+              </button>
+            </p>
+            <p className="control switch-mode-text">
+              { !this.state.isLogin ? 
+              <span>Already have an account? <span className="switch-mode-link" onClick={this.switchModeHandler}>Log in.</span></span> :
+              <span>Don't have an account? <span className="switch-mode-link" onClick={this.switchModeHandler}>Sign up.</span></span>
+              }
+            </p>
+          </div>
+        </form>
+      ) 
   }
 
-  return(
-    <form className="auth-form" onSubmit={ submitHandler }>
-      {/* Page Title */}
-      <div className="title has-text-centered">
-        { !isLogIn ? "Sign Up" : "Log In"}
-      </div>
-
-      {/* Email Form */}
-      <div className="field">
-        <label className="label" htmlFor="email">Email</label>
-        <p className="control has-icons-left">
-          <input type="email" id="email" className="input" placeholder="Piyopiyo@example.com" ref={emailEl} />
-          <span className="icon is-small is-left">
-            <FontAwesomeIcon icon={faEnvelope}/>
-          </span>
-        </p>
-      </div>
-
-      {/* Password Form */}
-      <div className="field">
-        <label className="label" htmlFor="password">Password</label>
-        <p className="control has-icons-left">
-          <input type="password" id="password" className="input" placeholder="***********" ref={passwordEl} />
-          <span className="icon is-small is-left">
-            <FontAwesomeIcon icon={faLock}/>
-          </span>
-        </p>
-      </div>
-
-      {/* Buttons */}
-      <div className="field is-grouped">
-        <p className="control">
-          <button type="submit" className="button is-primary">
-            Submit
-          </button>
-        </p>
-        <p className="control switch-mode-text">
-          { !isLogIn ? 
-          <span>Already have an account? <span className="switch-mode-link" onClick={switchModeHandler}>Log in.</span></span> :
-          <span>Don't have an account? <span className="switch-mode-link" onClick={switchModeHandler}>Sign up.</span></span>
-          }
-        </p>
-      </div>
-    </form>
-  ) 
 }
 
 export default AuthPage;
