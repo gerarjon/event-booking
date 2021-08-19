@@ -53,6 +53,7 @@ class App extends Component {
                 {/* If no token, redirect to auth */}
                 {!this.state.token && <Redirect from="/booking" to="/auth" exact />}
                 {this.state.token && <Redirect from="/auth" to="/events" exact />}
+                <Redirect from="/" to="events" exact />
                 <Route path="/auth" component={AuthPage} />
                 <Route path="/events" component={EventsPage} />
                 {this.state.token && (

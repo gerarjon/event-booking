@@ -53,8 +53,8 @@ const EventsPage = () => {
 
     const requestBody = {
       query: `
-        mutation {
-          createEvent(eventInput: {title: "${title}", description: "${description}", price: ${price}, date: "${date}"}) {
+        mutation CreateEvent($title: String!, $description: String!, $price: Float!, $date: String!) {
+          createEvent(eventInput: {title: $title, description: $description, price: $price, date: $date}) {
             _id
             title
             description
@@ -62,11 +62,16 @@ const EventsPage = () => {
             date
           }
         }
-      `
+      `,
+      variables: {
+        title: title,
+        price: price,
+        description: description,
+        date: date
+      }
     }
 
     const token = context.token;
-    console.log(token)
 
     fetch('http://localhost:3001/api', {
       method: 'POST',
@@ -157,14 +162,17 @@ const EventsPage = () => {
     }
     const requestBody = {
       query: `
-        mutation {
-          bookEvent(eventId: "${selectedEvent._id}") {
+        mutation BookEvent($id: ID!){
+          bookEvent(eventId: $id) {
             _id
             createdAt
             updatedAt
           }
         }
-      `
+      `,
+      variables: {
+        id: selectedEvent._id
+      }
     }
     fetch('http://localhost:3001/api', {
       method: 'POST',
