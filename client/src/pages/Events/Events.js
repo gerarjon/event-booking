@@ -73,7 +73,7 @@ const EventsPage = () => {
 
     const token = context.token;
 
-    fetch('/api', {
+    fetch('/api', { //change later
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {
@@ -125,7 +125,7 @@ const EventsPage = () => {
         }
       `
     }
-    fetch('/api', {
+    fetch('/api', { //change later
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {
@@ -174,7 +174,7 @@ const EventsPage = () => {
         id: selectedEvent._id
       }
     }
-    fetch('/api', {
+    fetch('/api', { //change later
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {

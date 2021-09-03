@@ -7,7 +7,8 @@ import "./style.css"
 
 class AuthPage extends Component {
   state = {
-    isLogin: true
+    isLogin: true,
+    loginError: false
   }
 
   static contextType = AuthContext
@@ -66,7 +67,7 @@ class AuthPage extends Component {
       };
     }
 
-    fetch('/api', {
+    fetch('/api', { //change later
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {
@@ -89,9 +90,11 @@ class AuthPage extends Component {
       }
     })
     .catch( err => {
+      this.setState({ loginError: true })
       console.log(err)
     })
   };
+
 
   render() {
       return(
@@ -100,6 +103,14 @@ class AuthPage extends Component {
           <div className="title has-text-centered">
             { !this.state.isLogin ? "Sign Up" : "Log In"}
           </div>
+
+          {/* Incorrect notification */}
+          { this.state.loginError &&
+            <div className="notification is-danger is-light" id="login-error-notif">
+              <i className="fas fa-exclamation-circle"></i>
+              <p>Your username or password is incorrect, please try logging in again or sign up.</p>
+            </div>
+          }
     
           {/* Email Form */}
           <div className="field">
