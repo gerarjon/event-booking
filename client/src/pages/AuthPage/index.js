@@ -8,7 +8,7 @@ import "./style.css"
 class AuthPage extends Component {
   state = {
     isLogin: true,
-    loginError: false
+    loginError: ""
   }
 
   static contextType = AuthContext
@@ -21,7 +21,10 @@ class AuthPage extends Component {
 
   switchModeHandler = () => {
     this.setState(prevState => {
-      return { isLogin: !prevState.isLogin };
+      return { 
+        isLogin: !prevState.isLogin,
+        loginError: ""
+       };
     });
   };
 
@@ -90,7 +93,11 @@ class AuthPage extends Component {
       }
     })
     .catch( err => {
-      this.setState({ loginError: true })
+      if (this.state.isLogin) {
+        this.setState({ loginError: "Your username or password is incorrect, please try logging in again or sign up." })
+      } else {
+        this.setState({ loginError: "User exists already or was just created, please log in." })
+      }
       console.log(err)
     })
   };
@@ -108,7 +115,7 @@ class AuthPage extends Component {
           { this.state.loginError &&
             <div className="notification is-danger is-light" id="login-error-notif">
               <i className="fas fa-exclamation-circle"></i>
-              <p>Your username or password is incorrect, please try logging in again or sign up.</p>
+              <p>{this.state.loginError}</p>
             </div>
           }
     
