@@ -18,3 +18,21 @@
   z-index: 10 !important;
 }
 
+.fadeInAndUp {
+  animation-name: fadeInAndUp;
+  animation-duration: 1s;
+}
+
+/* KEYFRAMES */
+
+@keyframes fadeInAndUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 60%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, -20%, 0)
+  }
+}
+

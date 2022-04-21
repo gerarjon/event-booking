@@ -24,7 +24,7 @@ const Home = () => {
 
               <div className="column is-hidden-mobile">
                 <div className="hero-iphone">
-                  <img src={mockup} alt="Mockup" />
+                  <img src={mockup} className="fadeInAndUp" alt="Mockup" />
                 </div>
               </div>
             </div>
@@ -33,7 +33,7 @@ const Home = () => {
           
         </div>
     </section>
-    
+
   </>
 )}
 
