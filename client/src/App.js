@@ -4,8 +4,11 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import AuthPage from './pages/AuthPage'
 import BookingsPage from './pages/Bookings';
 import EventsPage from './pages/Events/Events';
+import Home from './pages/Home';
+import NoMatch from './pages/NoMatch';
 import NavBar from './components/Navbar';
 import AuthContext from './context/auth-context';
+import Footer from './components/Footer';
 
 import 'bulma/css/bulma.min.css';
 import './App.css';
@@ -49,18 +52,21 @@ class App extends Component {
               isActiveHandle={this.isActiveHandle}
             />
             <main>
-              <Switch>
-                {/* If no token, redirect to auth */}
-                {!this.state.token && <Redirect from="/booking" to="/auth" exact />}
-                {this.state.token && <Redirect from="/auth" to="/events" exact />}
-                <Redirect from="/" to="events" exact />
-                <Route path="/auth" component={AuthPage} />
-                <Route path="/events" component={EventsPage} />
-                {this.state.token && (
-                  <Route path="/booking" component={BookingsPage} />
-                )}
-              </Switch>
+                <Switch>
+                  {/* If no token, redirect to auth */}
+                  {!this.state.token && <Redirect from="/booking" to="/auth" exact />}
+                  {this.state.token && <Redirect from="/auth" to="/events" exact />}
+                  <Route path="/" component={Home} exact/>
+                  <Route path="/auth" component={AuthPage} />
+                  <Route path="/events" component={EventsPage} />
+                  {this.state.token && (
+                    <Route path="/booking" component={BookingsPage} />
+                  )}
+                  <Route component={NoMatch} />
+                </Switch>
+
             </main>
+            <Footer />
           </AuthContext.Provider>
         </React.Fragment>
       </BrowserRouter>

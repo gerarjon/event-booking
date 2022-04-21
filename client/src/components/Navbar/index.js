@@ -8,7 +8,7 @@ const Navbar = ({isActive, isActiveHandle}) => (
   <AuthContext.Consumer>
     {context => { 
       return (
-        <nav className="navbar is-danger" role="navigation" aria-label="main navigation">
+        <nav className="navbar is-danger is-fixed-top" role="navigation" aria-label="main navigation">
           <div className="navbar-brand">
             <Link className="navbar-item" to="/">
               Event Booking

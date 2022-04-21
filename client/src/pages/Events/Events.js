@@ -199,7 +199,7 @@ const EventsPage = () => {
 
   return(
     <div>
-      <section className="section">
+      <section className="section section-first">
 
         <p className="title">
           Events

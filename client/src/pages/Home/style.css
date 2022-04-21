@@ -1,0 +1,20 @@
+.hero-body > .container > .columns {
+  margin: auto;
+  max-width: 1000px;
+}
+.hero-iphone {
+  text-align: center;
+}
+
+.hero-iphone > img { 
+  width: 75%;
+  margin-bottom: -150%;
+  transform: translateY(-20%);
+  z-index: 0;
+}
+
+.info {
+  position: relative;
+  z-index: 10 !important;
+}
+
