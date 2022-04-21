@@ -1,3 +1,7 @@
+.events-section {
+  min-height: 80vh;
+}
+
 .events-card-title {
   margin-top: -1rem !important;
   margin-bottom: 0.5rem !important;

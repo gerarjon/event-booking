@@ -198,7 +198,7 @@ const EventsPage = () => {
   }
 
   return(
-    <div>
+    <div className='events-section'>
       <section className="section section-first">
 
         <p className="title">

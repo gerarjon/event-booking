@@ -101,7 +101,7 @@ const BookingsPage = () => {
   }
 
   return(
-    <div>  
+    <div className='bookings-section'>  
       <section className="section section-first">
         <p className="title">
            Bookings
