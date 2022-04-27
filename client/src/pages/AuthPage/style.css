@@ -1,3 +1,7 @@
+.auth-section {
+  min-height: 80vh;
+}
+
 .auth-form {
   width: 30rem;
   max-width: 80%;

@@ -105,59 +105,61 @@ class AuthPage extends Component {
 
   render() {
       return(
-        <section className='section section-first'>
-          <form className="auth-form" onSubmit={ this.submitHandler }>
-            {/* Page Title */}
-            <div className="title has-text-centered">
-              { !this.state.isLogin ? "Sign Up" : "Log In"}
-            </div>
-
-            {/* Incorrect notification */}
-            { this.state.loginError &&
-              <div className="notification is-danger is-light" id="login-error-notif">
-                <i className="fas fa-exclamation-circle"></i>
-                <p>{this.state.loginError}</p>
+        <div className='auth-section'>
+          <section className='section section-first'>
+            <form className="auth-form" onSubmit={ this.submitHandler }>
+              {/* Page Title */}
+              <div className="title has-text-centered">
+                { !this.state.isLogin ? "Sign Up" : "Log In"}
               </div>
-            }
-      
-            {/* Email Form */}
-            <div className="field">
-              <label className="label" htmlFor="email">Email</label>
-              <p className="control has-icons-left">
-                <input type="email" id="email" className="input" placeholder="Piyopiyo@example.com" ref={this.emailEl} />
-                <span className="icon is-small is-left">
-                  <FontAwesomeIcon icon={faEnvelope}/>
-                </span>
-              </p>
-            </div>
-      
-            {/* Password Form */}
-            <div className="field">
-              <label className="label" htmlFor="password">Password</label>
-              <p className="control has-icons-left">
-                <input type="password" id="password" className="input" placeholder="***********" ref={this.passwordEl} />
-                <span className="icon is-small is-left">
-                  <FontAwesomeIcon icon={faLock}/>
-                </span>
-              </p>
-            </div>
-      
-            {/* Buttons */}
-            <div className="field is-grouped">
-              <p className="control">
-                <button type="submit" className="button is-primary">
-                  Submit
-                </button>
-              </p>
-              <p className="control switch-mode-text">
-                { !this.state.isLogin ? 
-                <span>Already have an account? <span className="switch-mode-link" onClick={this.switchModeHandler}>Log in.</span></span> :
-                <span>Don't have an account? <span className="switch-mode-link" onClick={this.switchModeHandler}>Sign up.</span></span>
-                }
-              </p>
-            </div>
-          </form>
-        </section>
+
+              {/* Incorrect notification */}
+              { this.state.loginError &&
+                <div className="notification is-danger is-light" id="login-error-notif">
+                  <i className="fas fa-exclamation-circle"></i>
+                  <p>{this.state.loginError}</p>
+                </div>
+              }
+        
+              {/* Email Form */}
+              <div className="field">
+                <label className="label" htmlFor="email">Email</label>
+                <p className="control has-icons-left">
+                  <input type="email" id="email" className="input" placeholder="Piyopiyo@example.com" ref={this.emailEl} />
+                  <span className="icon is-small is-left">
+                    <FontAwesomeIcon icon={faEnvelope}/>
+                  </span>
+                </p>
+              </div>
+        
+              {/* Password Form */}
+              <div className="field">
+                <label className="label" htmlFor="password">Password</label>
+                <p className="control has-icons-left">
+                  <input type="password" id="password" className="input" placeholder="***********" ref={this.passwordEl} />
+                  <span className="icon is-small is-left">
+                    <FontAwesomeIcon icon={faLock}/>
+                  </span>
+                </p>
+              </div>
+        
+              {/* Buttons */}
+              <div className="field is-grouped">
+                <p className="control">
+                  <button type="submit" className="button is-primary">
+                    Submit
+                  </button>
+                </p>
+                <p className="control switch-mode-text">
+                  { !this.state.isLogin ? 
+                  <span>Already have an account? <span className="switch-mode-link" onClick={this.switchModeHandler}>Log in.</span></span> :
+                  <span>Don't have an account? <span className="switch-mode-link" onClick={this.switchModeHandler}>Sign up.</span></span>
+                  }
+                </p>
+              </div>
+            </form>
+          </section>
+        </div>
       ) 
   }
 
