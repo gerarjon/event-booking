@@ -22,8 +22,6 @@ const EventsPage = () => {
     fetchEvents()
   }, []) // eslint-disable-line
 
-
-
   const isActiveHandler = () => {
     titleElRef.current.value = ""
     priceElRef.current.value = ""
@@ -36,6 +34,7 @@ const EventsPage = () => {
     setIsDetailsActive(!isDetailsActive)
   }
 
+  // Create Event Handler
   const onConfirm = () => {
     const title = titleElRef.current.value;
     const price = +priceElRef.current.value;
@@ -106,6 +105,7 @@ const EventsPage = () => {
     isActiveHandler();
   }
 
+  // Get Events Handler
   const fetchEvents = () => {
     setIsLoading(true);
     const requestBody = {
@@ -150,12 +150,20 @@ const EventsPage = () => {
     })
   }
 
+  // Show Event Handler
   const showDetailHandler = (eventId) => {
     let newEvent = events.find(e=>e._id === eventId)
     setSelectedEvent(newEvent)
     setIsDetailsActive(!isDetailsActive)
   }
 
+  // Delete Event Handler
+  // const deleteEventHandler = () => {
+
+  // }
+
+
+  // Book Event Handler
   const bookEventHandler = () => {
     if (!context.token) {
       setSelectedEvent(null)
