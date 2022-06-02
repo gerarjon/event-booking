@@ -25,10 +25,12 @@ This web app is made using MongoDB, Express, React, Node.js, and GraphQL!! Users
 and of course React
 
 ## Future Additions
-* Ability for users to delete events that they have made
-* Homepage
+* ~~Ability for users to delete events that they have made~~
+* ~~Homepage~~
 * Better authentification for emails and passwords
 * Ability to add pictures to their event
+* Ability for users to update events
+* Session storage for login tokens?
 
 
 ## Getting Started
