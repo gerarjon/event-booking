@@ -16,7 +16,7 @@ const BookingList = ({bookings, onDelete}) => {
                     {booking.event.title}
                   </p>
                   <p>
-                    <button id={booking.event._id} onClick={()=>onDelete(booking._id)}>Delete Event</button>
+                    <button id={booking.event._id} onClick={()=>onDelete(booking._id)}>Cancel Event</button>
                   </p>
                   <p>
                     {new Date(booking.event.date).toLocaleDateString()}

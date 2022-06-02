@@ -158,9 +158,49 @@ const EventsPage = () => {
   }
 
   // Delete Event Handler
-  // const deleteEventHandler = () => {
+  const deleteEventHandler = (eventId) => {
+    setIsLoading(true);
+    const requestBody = {
+      query: `
+        mutation DeleteEvent($id: ID!) {
+          deleteEvent(eventId: $id) {
+            _id
+            title
+          }
+        }
+      `,
+      variables: {
+        id: eventId
+      }
+    };
 
-  // }
+    fetch('/api', {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + context.token
+      }
+    })
+    .then(res=> {
+      if (res.status !== 200 && res.status !== 201) {
+        throw new Error('Failed');
+      }
+      return res.json();
+    })
+    .then(resData => {
+      console.log(resData);
+      let updatedEvents = events.filter(event => {
+        return event._id !== eventId;
+      })
+      setEvents(updatedEvents)
+      setIsLoading(false)
+    })
+    .catch( err => {
+      console.log(err);
+      setIsLoading(false)
+    })
+  }
 
 
   // Book Event Handler
@@ -269,8 +309,12 @@ const EventsPage = () => {
                       <p className="title is-5 events-card-title">
                         {event.title}
                       </p>
-                      <p>
+                      <p className='events-button-container'>
+                        {/* Show Event Handler */}
                         <button onClick={() => showDetailHandler(event._id)} id={event._id} data-target="modal-de">View details</button>
+                        {/* Delete Event Handler */}
+                        {context.userId === event.creator._id && (<button onClick={() => deleteEventHandler(event._id)}>Delete Event
+                        </button>)}
                       </p>
                       <p>
                         {new Date(event.date).toLocaleDateString()}

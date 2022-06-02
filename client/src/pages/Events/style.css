@@ -12,6 +12,11 @@
   color:red;
 }
 
+.events-button-container {
+  display: flex;
+  gap: 5px;
+}
+
 .spinner-container {
   margin: 0 auto;
   text-align: center;
